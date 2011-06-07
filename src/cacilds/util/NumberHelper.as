@@ -73,7 +73,8 @@ package cacilds.util
 
 			return result;
 		}
-
+                
+                // format "##.##"
 		public static function formatNumber(n : Number, format : String) : String
 		{
 			var a : int,b : int,i : int;
