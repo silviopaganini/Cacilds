@@ -23,6 +23,7 @@ package cacilds.util
 
 	/**
 	 * @author silvio paganini | s2paganini.com
+	 * @author keita kuroki
 	 */
 	public class XMLHelper
 	{

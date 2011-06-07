@@ -13,7 +13,6 @@
  * 
  *  0. You just DO WHAT THE FUCK YOU WANT TO. 
  *******************************************************************************/
-
 package cacilds.display
 {
 	import cacilds.core.IDisplayObject;
@@ -24,7 +23,6 @@ package cacilds.display
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.system.System;
-
 
 	/**
 	 * @author silvio paganini | s2paganini.com
@@ -81,7 +79,8 @@ package cacilds.display
 		public function removeAllListeners() : void
 		{
 			if (calledDispose || eventList) return;
-			while (eventList.length > 0) {
+			while (eventList.length > 0)
+			{
 				removeEventListener(eventList[0].type, eventList[0].listener, eventList[0].useCapture);
 			}
 		}
@@ -134,7 +133,6 @@ package cacilds.display
 		/**
 		 * GETTERS
 		 */
-		 
 		public function get view() : DisplayObject {
 			return this;
 		}

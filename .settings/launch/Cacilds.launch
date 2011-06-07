@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.powerflasher.fdt.ui.CompcGroup">
 <stringAttribute key="ARGUMENTS" value=" -target-player={playerVersion}"/>
-<stringAttribute key="OUTPUT" value="bin/cacilds_v01.swc"/>
+<stringAttribute key="LAUNCHER_DEPENDENCIES" value="[Self]"/>
+<stringAttribute key="OUTPUT" value="bin/cacilds.swc"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_RSLS" value="false"/>
 <booleanAttribute key="PASS_SWCS" value="true"/>
