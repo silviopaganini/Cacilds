@@ -37,8 +37,7 @@ package cacilds.display
 		{
 		}
 		
-		// TODO still work in progress
-		public function setup() : void
+		public function setup(data : Object) : void
 		{
 		}
 	}
