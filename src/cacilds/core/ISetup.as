@@ -21,6 +21,6 @@ package cacilds.core
 	 */
 	public interface ISetup
 	{
-		function setup(data : Object) : void;
+		function setup(data : Object = null) : void;
 	}
 }

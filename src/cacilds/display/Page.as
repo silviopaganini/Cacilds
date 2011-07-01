@@ -37,7 +37,7 @@ package cacilds.display
 		{
 		}
 		
-		public function setup(data : Object) : void
+		public function setup(data : Object = null) : void
 		{
 		}
 	}
