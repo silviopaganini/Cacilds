@@ -13,7 +13,6 @@
  * 
  *  0. You just DO WHAT THE FUCK YOU WANT TO. 
  *******************************************************************************/
- 
 package cacilds.util
 {
 	import flash.utils.getDefinitionByName;
@@ -56,11 +55,15 @@ package cacilds.util
 					switch(c)
 					{
 						case Boolean:
-							if (!isNaN(Number(v))) {
+							if (!isNaN(Number(v)))
+							{
 								target[p] = (Number(v) != 0);
-							} else if (v is Boolean) {
+							}
+							else if (v is Boolean)
+							{
 								target[p] = v;
-							} else {
+							}
+							else {
 								target[p] = v.toLowerCase() == "true" || v != "0";
 							}
 							break;
@@ -74,8 +77,10 @@ package cacilds.util
 							target[p] = c(v);
 							break;
 					}
-				} catch(e : Error)
+				}
+				catch(e : Error)
 				{
+					target[p] = v;
 					continue;
 				}
 			}
@@ -90,9 +95,11 @@ package cacilds.util
 
 			for (var p:String in obj)
 			{
-				if (obj[p] is String || obj[p] is Number) {
+				if (obj[p] is String || obj[p] is Number)
+				{
 					o += t + p + ": " + obj[p].toString() + "\n";
-				} else {
+				}
+				else {
 					o += t + p + ":\n" + objectToString(obj[p], level + 1);
 				}
 			}
