@@ -80,7 +80,6 @@ package cacilds.util
 				}
 				catch(e : Error)
 				{
-					target[p] = v;
 					continue;
 				}
 			}
