@@ -24,6 +24,6 @@ package cacilds.core
 	public interface IDisplayObject
 	{
 		function get view() : DisplayObject;
-		function update() : void;
+		function update( data : Object = null) : void;
 	}
 }

@@ -66,7 +66,7 @@ package cacilds.display
 		{
 		}
 
-		public function update() : void
+		public function update(data : Object = null) : void
 		{
 		}
 
