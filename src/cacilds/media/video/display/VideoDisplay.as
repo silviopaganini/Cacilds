@@ -20,35 +20,48 @@ package cacilds.media.video.display
 	import cacilds.media.states.VideoState;
 	import cacilds.media.video.Stream;
 	import cacilds.media.video.events.VideoEvents;
+	import cacilds.util.GraphicsHelper;
+
+	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.NetStatusEvent;
 	import flash.media.Video;
-
-
 
 	/**
 	 * @author silvio paganini | s2paganini.com
 	 */
 	public class VideoDisplay extends UIElement
 	{
+		public static const STRETCH : String = "stretch";
+		public static const WIDTH_ONLY : String = "widthOnly";
+		public static const HEIGHT_ONLY : String = "heightOnly";
+		public static const NONE : String = "none";
+		public static const PROPORTIONAL_OUTSIDE : String = "PROPORTIONAL_OUTSIDE";
+		public static const PROPORTIONAL_INSIDE : String = "PROPORTIONAL_INSIDE";
+		//
 		protected var stream : Stream;
 		protected var _netStatus : String;
 		protected var video : Video;
+		protected var scaleMode : String = "none";
 		//
 		private var state : String;
-		private var w : Number;
-		private var h : Number;
+		private var shape : Shape;
+		private var videoRatio : Number;
+		private var displayRatio : Number;
 
-		public function VideoDisplay(w : Number, h : Number)
+		public function VideoDisplay(w : Number, h : Number, scaleMode : String = "none")
 		{
-			this.w = w;
-			this.h = h;
+			shape = addChild(new Shape()) as Shape;
+			GraphicsHelper.drawSquare(true, shape, w, h);
+
+			this.scaleMode = scaleMode;
+
 			super();
 		}
 
 		override protected function draw() : void
 		{
-			video = new Video(w, h);
+			video = new Video();
 			addChild(video);
 			state = VideoState.STOPPED;
 		}
@@ -122,15 +135,75 @@ package cacilds.media.video.display
 			state = VideoState.STOPPED;
 		}
 
+		public function metadataLoaded() : void
+		{
+			if ("width" in stream._metaData) {
+				video.width = Number(stream._metaData.width);
+				video.height = Number(stream._metaData.height);
+				videoRatio = stream._metaData.width / stream._metaData.height;
+			}
+
+			scaleVideo();
+		}
+
+		protected function scaleVideo() : void
+		{
+			if (!video || !stream._metaData) return;
+
+			displayRatio = shape.width / shape.height;
+
+			var w : Number = shape.width;
+			var h : Number = shape.height;
+
+			if ((videoRatio < displayRatio && scaleMode == PROPORTIONAL_INSIDE) || (videoRatio > displayRatio && scaleMode == PROPORTIONAL_OUTSIDE)) {
+				w = h * videoRatio;
+			}
+			if ((videoRatio > displayRatio && scaleMode == PROPORTIONAL_INSIDE) || (videoRatio < displayRatio && scaleMode == PROPORTIONAL_OUTSIDE)) {
+				h = w / videoRatio;
+			}
+
+			if (scaleMode != HEIGHT_ONLY) {
+				video.width = stream._metaData.width * (w / stream._metaData.width);
+			}
+			if (scaleMode != WIDTH_ONLY) {
+				video.height = stream._metaData.height * (h / stream._metaData.height);
+			}
+
+			switch(scaleMode)
+			{
+				case STRETCH:
+					video.width = w;
+					video.height = h;
+					break;
+				case NONE:
+					video.width = Number(stream._metaData.width);
+					video.height = Number(stream._metaData.height);
+					break;
+			}
+
+			video.x = shape.width / 2 - video.width / 2;
+			video.y = shape.height / 2 - video.height / 2;
+		}
+
+		public function setSize(w : Number, h : Number) : void
+		{
+			GraphicsHelper.drawSquare(true, shape, w, h);
+			scaleVideo();
+		}
+
 		override public function dispose() : void
 		{
-			if (stream)
-			{
+			if (stream) {
 				if (stream.hasEventListener(NetStatusEvent.NET_STATUS)) stream.removeEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 				stream.close();
 				stream = null;
 			}
 			super.dispose();
+		}
+
+		public function set _scaleMode(scaleMode : String) : void {
+			this.scaleMode = scaleMode;
+			scaleVideo();
 		}
 	}
 }
