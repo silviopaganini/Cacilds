@@ -45,6 +45,7 @@ package cacilds.media.video.controller.ui
 			addChild(hit);
 			
 			hit.addEventListener(MouseEvent.MOUSE_DOWN, listenerHit);
+			hit.addEventListener(MouseEvent.MOUSE_UP, listenerHit);
 		}
 		
 		private function listenerHit(event : MouseEvent) : void
@@ -54,13 +55,11 @@ package cacilds.media.video.controller.ui
 			switch(event.type)
 			{
 				case "mouseDown":
-					hit.addEventListener(MouseEvent.MOUSE_UP, listenerHit);
 					hit.addEventListener(MouseEvent.MOUSE_MOVE, listenerHit);
 					stage.addEventListener(MouseEvent.MOUSE_UP, listenerHit);
 					break;
 					
 				case "mouseUp":
-					hit.removeEventListener(MouseEvent.MOUSE_UP, listenerHit);
 					hit.removeEventListener(MouseEvent.MOUSE_MOVE, listenerHit);
 					stage.removeEventListener(MouseEvent.MOUSE_UP, listenerHit);
 					
