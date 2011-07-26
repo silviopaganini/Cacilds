@@ -20,7 +20,7 @@ package cacilds.media.video.display
 	import cacilds.media.states.VideoState;
 	import cacilds.media.video.Stream;
 	import cacilds.media.video.events.VideoEvents;
-	import cacilds.util.GraphicsHelper;
+	import cacilds.util.GraphicsUtil;
 
 	import flash.display.Shape;
 	import flash.events.Event;
@@ -52,7 +52,7 @@ package cacilds.media.video.display
 		public function VideoDisplay(w : Number, h : Number, scaleMode : String = "none")
 		{
 			shape = addChild(new Shape()) as Shape;
-			GraphicsHelper.drawSquare(true, shape, w, h);
+			GraphicsUtil.drawSquare(true, shape, w, h);
 
 			this.scaleMode = scaleMode;
 
@@ -187,7 +187,7 @@ package cacilds.media.video.display
 
 		public function setSize(w : Number, h : Number) : void
 		{
-			GraphicsHelper.drawSquare(true, shape, w, h);
+			GraphicsUtil.drawSquare(true, shape, w, h);
 			scaleVideo();
 		}
 

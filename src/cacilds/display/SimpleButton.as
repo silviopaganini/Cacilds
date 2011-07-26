@@ -49,15 +49,15 @@ package cacilds.display
 			mouseChildren = !val;
 		}
 
-		protected function onClick(event : MouseEvent) : void
+		protected function onClick(event : MouseEvent = null) : void
 		{
 		}
 
-		protected function onRollOut(event : MouseEvent) : void
+		protected function onRollOut(event : MouseEvent = null) : void
 		{
 		}
 
-		protected function onRollOver(event : MouseEvent) : void
+		protected function onRollOver(event : MouseEvent = null) : void
 		{
 		}
 

@@ -61,7 +61,7 @@ package cacilds.media.video.controller.ui
 			}
 		}
 		
-		override protected function onClick(event : MouseEvent) : void
+		override protected function onClick(event : MouseEvent = null) : void
 		{
 			toogleState();
 		}

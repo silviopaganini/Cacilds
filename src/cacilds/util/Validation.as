@@ -21,11 +21,11 @@ package cacilds.util
 	 */
 	public class Validation
 	{
-		public static function email(wichEmail : String) : Boolean 
+		public static function email(whichEmail : String) : Boolean 
 		{
 			var regExpLine : RegExp = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]{2,64}(\.[a-z0-9-]{2,64}){0,1}\.[a-z]{2,4}$/;
 			
-			var result : Object = regExpLine.exec(wichEmail);
+			var result : Object = regExpLine.exec(whichEmail);
 			return (!(result == null));
 		}
 	}

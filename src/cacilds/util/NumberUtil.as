@@ -19,7 +19,7 @@ package cacilds.util
 	/**
 	 * @author silvio paganini | s2paganini.com
 	 */
-	public class NumberHelper
+	public class NumberUtil
 	{
 		public static function zeroFormat(number : Number, n : Number = 2, decimal : Boolean = false, trim : Boolean = false) : String
 		{

@@ -13,11 +13,9 @@
  * 
  *  0. You just DO WHAT THE FUCK YOU WANT TO. 
  *******************************************************************************/
- 
 package cacilds.util
 {
-	import avmplus.getQualifiedClassName;
-
+	import flash.utils.getQualifiedClassName;
 	import flash.display.DisplayObject;
 	import flash.utils.getDefinitionByName;
 
@@ -25,7 +23,7 @@ package cacilds.util
 	 * @author silvio paganini | s2paganini.com
 	 * @author keita kuroki
 	 */
-	public class XMLHelper
+	public class XMLUtil
 	{
 		static public function getXMLBoolean(arg : *) : Boolean
 		{
@@ -46,7 +44,8 @@ package cacilds.util
 
 				try
 				{
-					if (result.hasOwnProperty(prop)) {
+					if (result.hasOwnProperty(prop))
+					{
 						c = getDefinitionByName(getQualifiedClassName(result[prop]));
 
 						switch(c)
@@ -71,11 +70,13 @@ package cacilds.util
 				}
 			}
 
-			if (node.hasComplexContent()) {
+			if (node.hasComplexContent())
+			{
 				for (name in node.children())
 				{
 					prop = node.children()[name].name();
-					if (result.hasOwnProperty(prop)) {
+					if (result.hasOwnProperty(prop))
+					{
 						var nodeProp : XML = node.children()[name];
 
 						try
@@ -112,7 +113,8 @@ package cacilds.util
 
 				try
 				{
-					if (result.hasOwnProperty(prop)) {
+					if (result.hasOwnProperty(prop))
+					{
 						c = getDefinitionByName(getQualifiedClassName(result[prop]));
 
 						switch(c)
@@ -137,11 +139,13 @@ package cacilds.util
 				}
 			}
 
-			if (node.hasComplexContent()) {
+			if (node.hasComplexContent())
+			{
 				for (name in node.children())
 				{
 					prop = node.children()[name].name();
-					if (result.hasOwnProperty(prop)) {
+					if (result.hasOwnProperty(prop))
+					{
 						var nodeProp : XML = node.children()[name];
 
 						try

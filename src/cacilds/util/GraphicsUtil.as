@@ -21,7 +21,7 @@ package cacilds.util
 	/**
 	 * @author silvio paganini | s2paganini.com
 	 */
-	public class GraphicsHelper
+	public class GraphicsUtil
 	{
 		static public function drawSquare(clear : Boolean, target : *, w : Number, h : Number, col : Number = 0x000000, a : Number = 1, startX : Number = 0, startY : Number = 0, bitmapFill : BitmapData = null) : void 
 		{

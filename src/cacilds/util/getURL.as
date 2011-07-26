@@ -13,22 +13,16 @@
  * 
  *  0. You just DO WHAT THE FUCK YOU WANT TO. 
  *******************************************************************************/
- 
 package cacilds.util
 {
-	import flash.text.Font;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+
 	/**
-	 * @author silvio paganini | s2paganini.com
+	 * @author @silviopaganini | s2paganini.com
 	 */
-	public class FontHelper
+	public function getURL(url : String, target : String = "_blank") : void
 	{
-		public static function enumerate() : void
-		{
-			var embeddedFonts : Array = Font.enumerateFonts(false);
-			for (var i : Number = 0;i < embeddedFonts.length;i++) 
-			{
-				trace(embeddedFonts[i].fontName);
-			}
-		}
+		navigateToURL(new URLRequest(url), target);
 	}
 }
