@@ -24,6 +24,7 @@ package cacilds.debug
 
 	public class LogBook
 	{
+		public static var active : Boolean = true;
 		private static var _count : Number = 0;
 		private static var history : Array = [];
 		private static var instance : LogBook;
@@ -34,6 +35,8 @@ package cacilds.debug
 
 		public static function log(level : String = LogLevel.TRACE, ...params) : void
 		{
+			if(!active) return;
+			
 			if (!instance) instance = new LogBook();
 
 			instance.log(level, params);
