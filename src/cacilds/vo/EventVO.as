@@ -13,7 +13,6 @@
  * 
  *  0. You just DO WHAT THE FUCK YOU WANT TO. 
  *******************************************************************************/
- 
 package cacilds.vo
 {
 	/**
@@ -27,15 +26,15 @@ package cacilds.vo
 
 		public function EventVO(params : Object)
 		{
-			for(var n : String in params)
+			for (var n : String in params)
 			{
 				this[n] = params[n];
 			}
 		}
-		
-		public function toString() : String {
+
+		public function toString() : String
+		{
 			return "EventVO type ->" + type;
 		}
-
 	}
 }
