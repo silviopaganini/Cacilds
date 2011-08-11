@@ -113,6 +113,16 @@ package cacilds.display
 				super.removeEventListener(type, listener, useCapture);
 			}
 		}
+		
+		public function get scale() : Number
+		{
+			return scaleX;
+		}
+		
+		public function set scale(scale : Number) : void
+		{
+			scaleX = scaleY = scale;
+		}
 
 		private function getEventIndex(eventId : String) : int
 		{
