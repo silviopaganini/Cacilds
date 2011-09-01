@@ -65,7 +65,6 @@ package cacilds.text
 						this.defaultTextFormat = tf;
 					}
 				}
-				this.embedFonts = true;
 				this.styleSheet = _styleSheet;
 				if (_cssDefinition) setDefaultDefinition(_cssDefinition);
 			}

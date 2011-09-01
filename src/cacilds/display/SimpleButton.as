@@ -24,6 +24,9 @@ package cacilds.display
 	public class SimpleButton extends UIElement
 	{
 		protected var enabled : Boolean = true;
+		public var _rollOver : Function;
+		public var _rollOut : Function;
+		public var _click : Function;
 		
 		public function SimpleButton()
 		{
@@ -51,14 +54,17 @@ package cacilds.display
 
 		protected function onClick(event : MouseEvent = null) : void
 		{
+			if(_click != null) _click.call();
 		}
 
 		protected function onRollOut(event : MouseEvent = null) : void
 		{
+			if(_rollOut != null) _rollOut.call();
 		}
 
 		protected function onRollOver(event : MouseEvent = null) : void
 		{
+			if(_rollOver != null) _rollOver.call();
 		}
 
 		public function get _enabled() : Boolean {

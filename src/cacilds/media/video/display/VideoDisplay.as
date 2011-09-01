@@ -49,7 +49,7 @@ package cacilds.media.video.display
 		private var videoRatio : Number;
 		private var displayRatio : Number;
 
-		public function VideoDisplay(w : Number, h : Number, scaleMode : String = "none")
+		public function VideoDisplay(w : Number = 320, h : Number = 240, scaleMode : String = "none")
 		{
 			shape = addChild(new Shape()) as Shape;
 			GraphicsUtil.drawSquare(true, shape, w, h);
@@ -61,7 +61,7 @@ package cacilds.media.video.display
 
 		override protected function draw() : void
 		{
-			video = new Video();
+			video = new Video(shape.width, shape.height);
 			addChild(video);
 			state = VideoState.STOPPED;
 		}
@@ -88,12 +88,16 @@ package cacilds.media.video.display
 			}
 		}
 
-		public function play() : void
+		public function play(time : Number = -1) : void
 		{
 			if (state == VideoState.PLAYING) return;
 			if (!hasEventListener(Event.ENTER_FRAME)) addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			state = VideoState.PLAYING;
+			
+			if(time != -1) stream.seek(time);
+			
 			stream.resume();
+			
 			dispatchEvent(new VideoEvents(VideoEvents.PLAY));
 		}
 
@@ -128,6 +132,7 @@ package cacilds.media.video.display
 
 			stream = _stream;
 			stream.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+			stream.addEventListener(VideoEvents.METADATA_LOADED, metadataLoaded);
 			stream.pause();
 			stream.seek(0);
 			video.clear();
@@ -135,7 +140,7 @@ package cacilds.media.video.display
 			state = VideoState.STOPPED;
 		}
 
-		public function metadataLoaded() : void
+		public function metadataLoaded(event : VideoEvents = null) : void
 		{
 			if ("width" in stream._metaData) {
 				video.width = Number(stream._metaData.width);
