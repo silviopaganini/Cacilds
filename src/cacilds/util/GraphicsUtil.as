@@ -44,6 +44,7 @@ package cacilds.util
 			if(clear) graphics.clear();
 			
 			graphics.beginFill(col, a);
+			graphics.moveTo(0, 0);
 			graphics.lineTo(0, w);
 			graphics.lineTo(h, w / 2);
 			graphics.lineTo(h, w / 2);
