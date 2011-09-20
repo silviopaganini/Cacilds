@@ -54,17 +54,17 @@ package cacilds.display
 
 		protected function onClick(event : MouseEvent = null) : void
 		{
-			if(_click != null) _click.call();
+			if(_click != null) _click.call(this, event);
 		}
 
 		protected function onRollOut(event : MouseEvent = null) : void
 		{
-			if(_rollOut != null) _rollOut.call();
+			if(_rollOut != null) _rollOut.call(this, event);
 		}
 
 		protected function onRollOver(event : MouseEvent = null) : void
 		{
-			if(_rollOver != null) _rollOver.call();
+			if(_rollOver != null) _rollOver.call(this, event);
 		}
 
 		public function get _enabled() : Boolean {
