@@ -1,7 +1,6 @@
 package cacilds.util
 {
 	import flash.display.LoaderInfo;
-	import flash.errors.IllegalOperationError;
 
 	/**
 	﻿   * @author siLvio paganini | s2paganini.com
@@ -16,31 +15,13 @@ package cacilds.util
 		﻿  ﻿   */
 		public static function getClassByName(loaderInfo : LoaderInfo, whichAsset : String) : Class
 		{
-			try
-			{
-				return loaderInfo.applicationDomain.getDefinition(whichAsset) as Class;
-			}
-			catch (e : Error)
-			{
-				throw new IllegalOperationError(whichAsset + " definition not found");
-			}
-
-			return null;
+			return loaderInfo.applicationDomain.getDefinition(whichAsset) as Class;
 		}
 
 		public static function getInstanceByName(loaderInfo : LoaderInfo, whichAsset : String) : *
 		{
-			try
-			{
-				var c : Class = getClassByName(loaderInfo, whichAsset);
-				return new c();
-			}
-			catch (e : Error)
-			{
-				throw new IllegalOperationError(whichAsset + " definition not found");
-			}
-
-			return null;
+			var c : Class = getClassByName(loaderInfo, whichAsset);
+			return new c();
 		}
 	}
 }

@@ -75,20 +75,20 @@ package cacilds.util
 		}
                 
                 // format "##.##"
-		public static function formatNumber(n : Number, format : String) : String
+		public static function formatNumber(n : Number, format : String, char : String = ".") : String
 		{
 			var a : int,b : int,i : int;
 			var c : String,d : String,resultC : String,resultD : String;
 			var sString : String = n.toString();
 			var cZero : String = "";
 
-			if (format.indexOf(".") > -1) {
-				var formatSplit : Array = format.split(".");
+			if (format.indexOf(char) > -1) {
+				var formatSplit : Array = format.split(char);
 				a = formatSplit[0].length;
 				b = formatSplit[1].length;
 
 				if (sString.indexOf(".") > -1) {
-					var nSringSplit : Array = sString.split(".");
+					var nSringSplit : Array = sString.split(char);
 					c = nSringSplit[0];
 					d = nSringSplit[1];
 
@@ -118,10 +118,10 @@ package cacilds.util
 					resultD = cZero;
 				}
 
-				return resultC + "." + resultD;
+				return resultC + char + resultD;
 			} else {
 				a = format.length;
-				sString = sString.split(".").join("");
+				sString = sString.split(char).join("");
 
 				if (sString.length < a) {
 					for (i = -1; i < a - sString.length; i++) cZero += "0";

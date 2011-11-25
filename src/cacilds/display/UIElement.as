@@ -78,7 +78,7 @@ package cacilds.display
 
 		public function removeAllListeners() : void
 		{
-			if (calledDispose || eventList) return;
+			if (calledDispose || !eventList) return;
 			while (eventList.length > 0)
 			{
 				removeEventListener(eventList[0].type, eventList[0].listener, eventList[0].useCapture);
