@@ -88,7 +88,12 @@ package cacilds.display
 		public function removeAllChildren() : void
 		{
 			if (calledDispose) return;
-			while (numChildren > 0) removeChildAt(0);
+			while (numChildren > 0)
+			{
+				var child : DisplayObject = getChildAt(0);
+				if (child is UIElement) UIElement(child).dispose();
+				removeChild(child);
+			}
 		}
 
 		public function dispose() : void
@@ -113,14 +118,12 @@ package cacilds.display
 				super.removeEventListener(type, listener, useCapture);
 			}
 		}
-		
-		public function get scale() : Number
-		{
+
+		public function get scale() : Number {
 			return scaleX;
 		}
-		
-		public function set scale(scale : Number) : void
-		{
+
+		public function set scale(scale : Number) : void {
 			scaleX = scaleY = scale;
 		}
 

@@ -15,6 +15,7 @@
  *******************************************************************************/
 package cacilds.util
 {
+	import flash.utils.Dictionary;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 
@@ -104,6 +105,14 @@ package cacilds.util
 			}
 
 			return o;
+		}
+		
+		static public function isDictEmpty(dict : Dictionary) : Boolean
+		{
+			var count : int = 0;
+			var n : String;
+			for(n in dict) count++;
+			return count == 0;
 		}
 	}
 }
