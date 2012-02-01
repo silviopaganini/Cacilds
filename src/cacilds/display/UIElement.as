@@ -82,6 +82,7 @@ package cacilds.display
 			while (eventList.length > 0)
 			{
 				removeEventListener(eventList[0].type, eventList[0].listener, eventList[0].useCapture);
+				eventList.shift();
 			}
 		}
 
