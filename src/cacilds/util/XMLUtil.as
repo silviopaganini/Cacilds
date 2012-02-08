@@ -25,6 +25,11 @@ package cacilds.util
 	 */
 	public class XMLUtil
 	{
+		public static function filterStrings(s : String) : String
+		{
+			return s.split("<").join("&#60;").split(">").join("&#62;").split(":").join("&#58;").split(";").join("&#59;").split("=").join("&#61;");
+		}
+		
 		static public function getXMLBoolean(arg : *) : Boolean
 		{
 			return (arg == 1 || arg == "1" || arg == "true" || arg == true);
