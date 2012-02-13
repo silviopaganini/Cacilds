@@ -141,7 +141,7 @@ package cacilds.util
 		
 		public static function randomNumber(low : Number = 0, high : Number = 1) : Number
 		{
-			return ((Math.random() * (high - low)) + low) % high;
+			return (((Math.random() * (high - low)) + low) % high);
 		}
 	}
 }

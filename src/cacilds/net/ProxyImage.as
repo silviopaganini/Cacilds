@@ -1,5 +1,7 @@
 package cacilds.net
 {
+	import flash.events.SecurityErrorEvent;
+	import flash.events.IOErrorEvent;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Loader;
@@ -28,6 +30,12 @@ package cacilds.net
 			urlLoader = new URLLoader();
 			urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			urlLoader.addEventListener(Event.COMPLETE, urlLoaderComplete);
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, errorHandler);
+		}
+
+		private function errorHandler(event : *) : void
+		{
 		}
 
 		public function start() : void
@@ -48,7 +56,7 @@ package cacilds.net
 		private function photoComplete(e : Event) : void
 		{
 			e.currentTarget.removeEventListener(Event.COMPLETE, photoComplete);
-			bmd = Bitmap(e.target.content).bitmapData.clone();
+			bmd = Bitmap(e.target.content).bitmapData;
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 
