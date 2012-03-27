@@ -22,7 +22,6 @@ package cacilds.media.video
 	import flash.net.NetConnection;
 	import flash.net.NetStream;
 
-
 	/**
 	 * @author silvio paganini | s2paganini.com
 	 */
