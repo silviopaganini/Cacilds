@@ -1,5 +1,6 @@
 package cacilds.net
 {
+	import flash.events.HTTPStatusEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.IOErrorEvent;
 	import flash.display.Bitmap;
@@ -15,6 +16,7 @@ package cacilds.net
 	/**
 	 * @author silvio paganini | keita kuroki
 	 */
+	
 	public class ProxyImage extends EventDispatcher
 	{
 		private var urlLoader : URLLoader;
@@ -31,11 +33,18 @@ package cacilds.net
 			urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			urlLoader.addEventListener(Event.COMPLETE, urlLoaderComplete);
 			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			urlLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatus);
 			urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, errorHandler);
+		}
+
+		private function httpStatus(event : HTTPStatusEvent) : void
+		{
+			dispatchEvent(event);
 		}
 
 		private function errorHandler(event : *) : void
 		{
+			dispatchEvent(event);
 		}
 
 		public function start() : void
