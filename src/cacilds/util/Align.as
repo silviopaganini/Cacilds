@@ -1,6 +1,7 @@
 package cacilds.util
 {
 	import flash.display.DisplayObject;
+	import flash.display.Stage;
 	/**
 	 * Align.as
 	 * @author silvio paganini | s2paganini.com
@@ -13,9 +14,10 @@ package cacilds.util
 		 * @param ref DisplayObject reference
 		 * @param obj Object to be aligned
 		 */
-		public static function centreX(ref : DisplayObject, obj : DisplayObject) : void
+		public static function centreX(ref : DisplayObject, obj : DisplayObject, offset : Number = 0) : void
 		{
-			obj.x = ref.x + ((ref.width - obj.width) >> 1); 
+			var w : Number = ref is Stage ? Stage(ref).stageWidth : ref.width;
+			obj.x = (ref.x + ((w - obj.width) >> 1)) + offset; 
 		}
 		
 		/**
@@ -23,9 +25,10 @@ package cacilds.util
 		 * @param ref DisplayObject reference
 		 * @param obj Object to be aligned
 		 */
-		public static function centreY(ref : DisplayObject, obj : DisplayObject) : void
+		public static function centreY(ref : DisplayObject, obj : DisplayObject, offset : Number = 0) : void
 		{
-			obj.y = ref.y + ((ref.height - obj.height) >> 1); 
+			var h : Number = ref is Stage ? Stage(ref).stageHeight : ref.height;
+			obj.y = (ref.y + ((h - obj.height) >> 1)) + offset; 
 		}
 		
 		/**
@@ -33,10 +36,10 @@ package cacilds.util
 		 * @param ref DisplayObject reference
 		 * @param obj Object to be aligned
 		 */
-		public static function centre(ref : DisplayObject, obj : DisplayObject) : void
+		public static function centre(ref : DisplayObject, obj : DisplayObject, offsetX : Number = 0, offsetY : Number = 0) : void
 		{
-			centreX(ref, obj);
-			centreY(ref, obj);
+			centreX(ref, obj, offsetX);
+			centreY(ref, obj, offsetY);
 		}
 	}
 }
