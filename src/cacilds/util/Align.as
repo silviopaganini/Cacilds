@@ -14,10 +14,11 @@ package cacilds.util
 		 * @param ref DisplayObject reference
 		 * @param obj Object to be aligned
 		 */
-		public static function centreX(ref : DisplayObject, obj : DisplayObject, offset : Number = 0) : void
+		public static function centreX(ref : *, obj : DisplayObject, offset : Number = 0) : void
 		{
-			var w : Number = ref is Stage ? Stage(ref).stageWidth : ref.width;
-			obj.x = (ref.x + ((w - obj.width) >> 1)) + offset; 
+			var w : Number = ref is Stage ? Stage(ref).stageWidth : (ref is Number ? ref : ref.width);
+			var xx : Number = (ref is Number || ref is Stage ? 0 : ref.x);
+			obj.x = (xx + ((w - obj.width) >> 1)) + offset; 
 		}
 		
 		/**
@@ -25,10 +26,11 @@ package cacilds.util
 		 * @param ref DisplayObject reference
 		 * @param obj Object to be aligned
 		 */
-		public static function centreY(ref : DisplayObject, obj : DisplayObject, offset : Number = 0) : void
+		public static function centreY(ref : *, obj : DisplayObject, offset : Number = 0) : void
 		{
-			var h : Number = ref is Stage ? Stage(ref).stageHeight : ref.height;
-			obj.y = (ref.y + ((h - obj.height) >> 1)) + offset; 
+			var h : Number = ref is Stage ? Stage(ref).stageHeight : (ref is Number ? ref : ref.height);
+			var yy : Number = (ref is Number || ref is Stage ? 0 : ref.y);
+			obj.y = (yy + ((h - obj.height) >> 1)) + offset; 
 		}
 		
 		/**
