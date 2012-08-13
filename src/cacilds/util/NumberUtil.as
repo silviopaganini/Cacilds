@@ -73,6 +73,13 @@ package cacilds.util
 
 			return result;
 		}
+		
+		public static function generateCode(digits : int) : int
+		{
+			var r : String = "";
+			for(var i : int = 0; i<digits;i++) r += int(Math.random() * 9);
+			return int(r);
+		}	
                 
                 // format "##.##"
 		public static function formatNumber(n : Number, format : String, char : String = ".") : String
