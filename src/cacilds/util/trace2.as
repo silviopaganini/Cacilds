@@ -8,23 +8,17 @@ package cacilds.util
 	 */
 	public function trace2(...args) : void
 	{
-		if(args is Object)
-		{
-			var res : String = "";
-			for(var n : String in args) res += n + " - " + args[n] + ",";
-		}
-		
 		if(!ExternalInterface.available) 
 		{
-			trace(res || args);
+			trace(args);
 			return;
 		}
 			
 		ExternalInterface.call("(function(){" +
 			"if(console){" +
-				"console.log('"+ (res || args) +"');" +
+				"console.log('"+ (args) +"');" +
 			"} else {" +
-				"alert('"+ (res || args) +"')" +
+				"alert('"+ (args) +"')" +
 			"}" +
 		"})");
 	}
