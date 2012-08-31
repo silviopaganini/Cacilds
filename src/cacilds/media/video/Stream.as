@@ -33,6 +33,9 @@ package cacilds.media.video
 		private var progress : Number;
 		//
 		protected var metaData : Object;
+		public var name : String;
+		public var url : String;
+		public var _paused : Boolean = false;
 
 		public function Stream(connection : NetConnection = null, peerID : String = "connectToFMS")
 		{
@@ -48,12 +51,37 @@ package cacilds.media.video
 
 		public function load(url : String) : void
 		{
+			_paused = false;
+			
+			this.url = url;
 			close();
 			client = {onMetaData:metaDataLoader};
+				
 			play(url);
 			seek(0);
 			dispatchEvent(new VideoEvents(VideoEvents.LOAD_START));
 			startProgressCheck();
+		}
+		
+		public function playVideo() : void
+		{
+			if(_paused) {
+				_paused = false;
+				resume();
+			}
+		}
+		
+		override public function pause() : void
+		{
+			_paused = true;
+			super.pause();
+		}
+		
+		public function reset() : void
+		{
+			pause();
+			_paused = true;
+			seek(0);
 		}
 
 		override public function close() : void
@@ -101,6 +129,7 @@ package cacilds.media.video
 		}
 
 		public function get duration() : Number {
+			
 			return metaData.duration;
 		}
 

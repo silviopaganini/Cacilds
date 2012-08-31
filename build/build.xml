@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Cacilds" default="1.1 Debug Browser">
+	<property file="build.properties" />
+	
+	<sound>
+		<success source="/System/Library/Sounds/Glass.aiff" />
+		<fail source="/System/Library/Sounds/Ping.aiff" />
+	</sound>
+		
+	<target name="1. Compile">
+		<antcall target="Versioning" />
+		
+		<property name="arg1" value="${startswf}" />
+		<property name="arg2" value="${debugswf}" />
+		<property name="projectName" value="${ant.project.name}" />
+			
+		<script language="javascript">
+		<![CDATA[
+			var arg = project.getProperty("arg1");
+			var startSWF = arg == "${startswf}" ? "true" : arg;  
+			project.setProperty("startSWF", startSWF);
+			
+			var arg1 = project.getProperty("arg2");
+			var debugSWF = arg1 == "${debugswf}" ? "true" : arg1;  
+			project.setProperty("debugSWF", debugSWF);
+		]]>
+		</script>
+		
+		 <fdt.loadProjectProperties projectname="${projectName}" />
+   		 <fdt.launch.application projectname="${FDTProject}" 
+			mainclass="${FDTProjectPath}${project.main}" 
+			compilerarguments="-static-link-runtime-shared-libraries=true 
+   		 		-target-player=${FDTProjectPlayerVersion} 
+   		 		-library-path+='${FDTProjectSdkPath}/frameworks/locale/en_US' 
+   		 		-swf-version=${swf.version} 
+   		 		-optimize=true
+   		 		-define+=CONFIG::VERSION,'${project.version}'" 
+   		 		
+			target="${FDTProjectPath}/${swf.location}" 
+			startswf="${startSWF}" 
+			debug="${debugSWF}"
+			swflauncher="Adobe Flash Player" 
+			swflocation="${swf.location}" 
+   		 />
+	</target>
+	
+	<target name="1.2 Profile">
+		
+		<antcall target="1. Compile">
+			<param name="startswf" value="true"/>
+			<param name="debugswf" value="true"/>
+		</antcall>
+		
+		<fdt.startProfiler 
+			collectstackdata="true" 
+			filterinternalpackages="true" 
+		    memoryprofilingenabled="true" 
+			performanceprofilingenabled="false" 
+		    projectname="ColeHaan" 
+			targetswf="${FDTProjectPath}/${swf.location}"
+		/>
+	</target>
+	
+	<target name="1.1 Debug Browser">
+		
+		<antcall target="1. Compile">
+			<param name="startswf" value="false"/>
+			<param name="debugswf" value="true"/>
+		</antcall>
+		
+		<antcall target="3. Open in Browser" />
+		
+	</target>
+	
+	<target name="2. Release">
+		
+		<antcall target="1. Compile">
+			<param name="startswf" value="false"/>
+			<param name="debugswf" value="false"/>
+		</antcall>
+				
+		<antcall target="3. Open in Browser" />
+		
+	</target>
+	
+	<target name="3. Open in Browser">
+		<exec executable="open" spawn="true">
+		 	<arg line="${browser.args}" />
+			<arg line="${localServer.URL}" />
+		</exec>
+	</target>
+	
+	<target name="Versioning">
+		<script language="javascript">
+		<![CDATA[
+			var versionArr = String(project.getProperty("project.version")).split(".");
+			versionArr[versionArr.length - 1] = Number(versionArr[versionArr.length - 1]) + 1;
+			project.setProperty("version", versionArr.join("."));
+		]]>
+		</script>
+		<propertyfile file="${basedir}/build.properties">
+			<entry key="project.version" value="${version}" />
+		</propertyfile>
+		
+	</target>
+</project>
+
